@@ -1,0 +1,1434 @@
+<body>
+  <button id="play" disabled>
+    Play!
+  </button>
+
+  <canvas id="notes"></canvas>
+</body>
+
+<script>
+//Figure out why the snare is not playing
+var prefix = 'https://pincescpu987.github.io/musicnotes/grand';
+
+var prefixdrums = 'https://pincescpu987.github.io/musicnotes/808';
+var drumnames = ('click,hitom,cow,midtom1,midtom2,lowtom1,lowtom2,cymbal,hihatopen,hihatclosed,snareclick,snare1,snare2,clap1,clap2,kick1,kick2,kick3').split(',');
+
+var urls = {};
+var urlsdrums = {};
+
+for (var i = 2; i <= 7; i++) {
+	urls['a' + i] = prefix + 'a' + i + '.wav';
+}
+
+for (var i = 0; i < drumnames.length; i++) {
+	urlsdrums[drumnames[i]] = prefixdrums + drumnames[i] + '.wav';
+}
+
+//what;
+
+
+var numfiles = 0;
+
+// loop through each key/value
+for(var key in urls) {
+
+    // increase the count
+    numfiles++;
+}
+
+var numfilesdrums = 0;
+
+// loop through each key/value
+for(var key in urlsdrums) {
+
+    // increase the count
+    numfilesdrums++;
+}
+
+var loaded = 0;
+
+var context = new AudioContext();
+var playButton = document.querySelector('#play');
+
+var a2, a3, a4, a5, a6, a7;
+
+async function load() {
+	window.fetch(urls.a2)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      a2 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urls.a3)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      a3 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urls.a4)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      a4 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urls.a5)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      a5 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urls.a6)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      a6 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urls.a7)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      a7 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  
+  
+  window.fetch(urlsdrums.click)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.click = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.hitom)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.hitom = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.cow)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.cow = audioBuffer;
+      loaded++;
+    }
+  );
+  
+ 	window.fetch(urlsdrums.midtom1)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.midtom1 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.midtom2)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.midtom2 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.lowtom1)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.lowtom1 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.lowtom2)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.lowtom2 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.cymbal)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.cymbal = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.hihatopen)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.hihatopen = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.hihatclosed)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.hihatclosed = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.snareclick)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.snareclick = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.snare1)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.snare1 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.snare2)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.snare2 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.clap1)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.clap1 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.clap2)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.clap2 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.kick1)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.kick1 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.kick2)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.kick2 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  window.fetch(urlsdrums.kick3)
+    .then(
+    response => response.arrayBuffer()
+  )
+    .then(
+    arrayBuffer => context.decodeAudioData(arrayBuffer)
+  )
+    .then(
+    audioBuffer => {
+      window.kick3 = audioBuffer;
+      loaded++;
+    }
+  );
+  
+  
+  
+  while(loaded != numfiles + numfilesdrums) {
+    await new Promise((rs, rj) => {setTimeout(rs, 1000)});
+	}
+  
+  playButton.disabled = false;
+  
+  window.notes = [a2, a3, a4, a5, a6, a7];
+  window.drums = [click, hitom, cow, midtom1, midtom2, lowtom1, lowtom2, cymbal, hihatopen, hihatclosed, snareclick, snare1, snare2, clap1, clap2, kick1, kick2, kick3];
+  
+  /*
+  playButton.onmousedown = () => {
+  	playNote({note: 'e6',vol: 1, len: 1});
+    playNote({note: 'c6', vol: 1, len: 1});
+    playNote({note: 'g5', vol: 1, len: 1});
+    playNote({note: 'e5', vol: 1, len: 1});
+  };
+  
+  playButton.onmouseup = () => {
+  	playNote({note: 'c6', vol: 1, len: 1});
+    playNote({note: 'g5', vol: 1, len: 1});
+    playNote({note: 'e5', vol: 1, len: 1});
+    playNote({note: 'c5', vol: 1, len: 1});
+  };
+  */
+  
+  playButton.onclick = () => {
+  	window.requestAnimationFrame(playSong);
+    playButton.style.display = 'none';
+  }
+}
+
+load();
+
+var songloudness = context.createGain();
+
+songloudness.gain.setValueAtTime(1, context.currentTime);
+songloudness.connect(context.destination);
+
+function play(audioBuffer, detune, volume, length) {
+ 	var source;
+  
+  source = context.createBufferSource();
+  source.buffer = audioBuffer;
+  var vol = context.createGain();
+  source.connect(vol);
+  source.detune.value = detune;
+  vol.connect(songloudness);
+  
+  vol.gain.setValueAtTime(volume, context.currentTime);
+  
+  var volRamp = 1;
+  
+  for(var i = length; i <= length + 0.1; i += 0.01) {
+  	vol.gain.setValueAtTime(volRamp * volume, context.currentTime + i);
+    volRamp -= 0.1;
+  }
+  
+  vol.gain.setValueAtTime(0, context.currentTime + length + 0.1);
+  
+  source.connect(vol);
+  source.start();
+}
+
+function playNote(data) {
+	if (data.note) {
+  	var note = data.note;
+  
+    var key = ''
+    var octave = '';
+
+    for (var i = 0; i < note.length; i++) {
+      if (i == note.length - 1) {
+        octave = Number(note[i]);
+      } else {
+        key += note[i];
+      }
+    }
+
+
+
+    var detunes = {
+      'a': 0,
+      'a#': 100,
+      'b': 200,
+      'c': -900,
+      'c#': -800,
+      'd': -700,
+      'd#': -600,
+      'e': -500,
+      'f': -400,
+      'f#': -300,
+      'g': -200,
+      'g#': -100,
+    };
+
+    if (notes[octave - 2]) {
+      play(notes[octave - 2], detunes[key], data.vol, data.len);
+    }
+  } else if (data.drum) {
+  	if (drums[drumnames.indexOf(data.drum)]) {
+    	play(drums[drumnames.indexOf(data.drum)], 0, data.vol, data.len);
+    }
+  }
+}
+
+var unit = (1 / (124 / 60)) / 4;
+
+var song = [
+	{note: 'a3', vol: 1, len: unit * 3, time: 0},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * 3},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * 6},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * 9},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * 14},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * 16},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * 19},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * 22},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * 25},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * 28},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + 32)},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + 32)},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + 32)},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + 32)},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + 32)},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + 32)},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + 32)},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + 32)},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + 32)},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + 32)},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 2))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 2))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 2))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 2))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 2))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 2))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 2))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 2))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 2))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 2))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 3))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 3))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 3))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 3))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 3))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 3))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 3))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 3))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 3))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 3))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 4))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 4))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 4))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 4))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 4))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 4))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 4))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 4))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 4))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 4))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 5))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 5))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 5))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 5))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 5))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 5))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 5))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 5))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 5))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 5))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 6))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 6))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 6))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 6))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 6))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 6))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 6))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 6))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 6))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 6))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 7))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 7))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 7))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 7))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 7))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 7))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 7))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 7))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 7))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 7))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 8))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 8))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 8))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 8))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 8))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 8))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 8))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 8))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 8))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 8))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 9))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 9))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 9))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 9))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 9))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 9))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 9))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 9))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 9))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 9))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 12))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 12))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 12))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 12))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 12))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 12))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 12))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 12))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 12))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 12))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 13))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 13))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 13))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 13))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 13))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 13))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 13))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 13))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 13))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 13))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 14))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 14))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 14))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 14))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 14))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 14))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 14))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 14))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 14))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 14))},
+  
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (0 + (32 * 15))},
+  {note: 'a3', vol: 1, len: unit * 3, time: unit * (3 + (32 * 15))},
+  {note: 'g3', vol: 1, len: unit * 3, time: unit * (6 + (32 * 15))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (9 + (32 * 15))},
+  {note: 'g3', vol: 1, len: unit * 2, time: unit * (14 + (32 * 15))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (16 + (32 * 15))},
+  {note: 'c4', vol: 1, len: unit * 3, time: unit * (19 + (32 * 15))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (22 + (32 * 15))},
+  {note: 'f3', vol: 1, len: unit * 3, time: unit * (25 + (32 * 15))},
+  {note: 'g3', vol: 1, len: unit * 4, time: unit * (28 + (32 * 15))},
+  
+  
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 2))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 2))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 2))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 2))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 2))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 2))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 2))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 2))},
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (16 + (32 * 2))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (18 + (32 * 2))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (20 + (32 * 2))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (22 + (32 * 2))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (24 + (32 * 2))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (26 + (32 * 2))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (28 + (32 * 2))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (30 + (32 * 2))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 3))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 3))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 3))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 3))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 3))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 3))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 3))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 3))},
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (16 + (32 * 3))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (18 + (32 * 3))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (20 + (32 * 3))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (22 + (32 * 3))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (24 + (32 * 3))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (26 + (32 * 3))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (28 + (32 * 3))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (30 + (32 * 3))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 4))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 4))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 4))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 4))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 4))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 4))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 4))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 4))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 5))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 5))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 5))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 5))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 5))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 5))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 5))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 5))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 8))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 8))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 8))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 8))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 8))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 8))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 8))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 8))},
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (16 + (32 * 8))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (18 + (32 * 8))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (20 + (32 * 8))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (22 + (32 * 8))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (24 + (32 * 8))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (26 + (32 * 8))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (28 + (32 * 8))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (30 + (32 * 8))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 9))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 9))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 9))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 9))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 9))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 9))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 9))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 9))},
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (16 + (32 * 9))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (18 + (32 * 9))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (20 + (32 * 9))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (22 + (32 * 9))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (24 + (32 * 9))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (26 + (32 * 9))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (28 + (32 * 9))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (30 + (32 * 9))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 10))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 10))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 10))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 10))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 10))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 10))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 10))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 10))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 11))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 11))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 11))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 11))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 11))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 11))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 11))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 11))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 12))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 12))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 12))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 12))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 12))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 12))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 12))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 12))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 13))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 13))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 13))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 13))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 13))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 13))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 13))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 13))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 14))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 14))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 14))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 14))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 14))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 14))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 14))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 14))},
+  
+  {note: 'e5', vol: 1, len: unit * 2, time: unit * (0 + (32 * 15))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (2 + (32 * 15))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (4 + (32 * 15))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (6 + (32 * 15))},
+  {note: 'a4', vol: 1, len: unit * 2, time: unit * (8 + (32 * 15))},
+  {note: 'b4', vol: 1, len: unit * 2, time: unit * (10 + (32 * 15))},
+  {note: 'c5', vol: 1, len: unit * 2, time: unit * (12 + (32 * 15))},
+  {note: 'd5', vol: 1, len: unit * 2, time: unit * (14 + (32 * 15))},
+  
+  
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (0 + (32 * 6))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (4 + (32 * 6))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (8 + (32 * 6))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (12 + (32 * 6))},
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 6))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 6))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 6))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 6))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (0 + (32 * 7))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (4 + (32 * 7))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (8 + (32 * 7))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (12 + (32 * 7))},
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 7))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 7))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 7))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 7))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (0 + (32 * 8))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (4 + (32 * 8))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (8 + (32 * 8))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (12 + (32 * 8))},
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 8))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 8))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 8))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 8))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (0 + (32 * 9))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (4 + (32 * 9))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (8 + (32 * 9))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (12 + (32 * 9))},
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 9))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 9))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 9))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 9))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (0 + (32 * 10))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (4 + (32 * 10))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (8 + (32 * 10))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (12 + (32 * 10))},
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 10))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 10))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 10))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 10))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (0 + (32 * 11))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (4 + (32 * 11))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (8 + (32 * 11))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (12 + (32 * 11))},
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 11))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 11))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 11))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 11))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 12))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 12))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 12))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 12))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 13))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 13))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 13))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 13))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 14))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 14))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 14))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 14))},
+  
+  {note: 'e4', vol: 1, len: unit * 4, time: unit * (16 + (32 * 15))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (20 + (32 * 15))},
+  {note: 'a3', vol: 1, len: unit * 4, time: unit * (24 + (32 * 15))},
+  {note: 'c4', vol: 1, len: unit * 4, time: unit * (28 + (32 * 15))},
+  
+  
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 0))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 0))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 0))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 0))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 0))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 0))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 0))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 1))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 1))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 1))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 1))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 1))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 1))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 1))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 2))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 2))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 2))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 2))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 2))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 2))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 2))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 3))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 3))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 3))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 3))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 3))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 3))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 3))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 4))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 4))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 4))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 4))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 4))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 4))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 4))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 5))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 5))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 5))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 5))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 5))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 5))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 5))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 6))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 6))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 6))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 6))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 6))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 6))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 6))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 7))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 7))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 7))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 7))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 7))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 7))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 7))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 8))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 8))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 8))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 8))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 8))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 8))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 8))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 9))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 9))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 9))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 9))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 9))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 9))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 9))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 10))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 10))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 10))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 10))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 10))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 10))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 10))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 11))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 11))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 11))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 11))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 11))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 11))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 11))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 12))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 12))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 12))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 12))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 12))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 12))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 12))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 13))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 13))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 13))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 13))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 13))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 13))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 13))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 14))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 14))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 14))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 14))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 14))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 14))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 14))},
+  
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (0 + (32 * 15))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (4 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (7 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (8 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (10 + (32 * 15))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (12 + (32 * 15))},
+  {drum: 'clap1', vol: 1, len: unit, time: unit * (14 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (16 + (32 * 15))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (20 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (23 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (24 + (32 * 15))},
+  {drum: 'kick3', vol: 1, len: unit, time: unit * (26 + (32 * 15))},
+  {drum: 'snare2', vol: 1, len: unit, time: unit * (28 + (32 * 15))},
+  
+  
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 2))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 2))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 3))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 3))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 6))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 6))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 7))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 7))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 8))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 8))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 9))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 9))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 10))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 10))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 11))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 11))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 14))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 14))},
+  
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (2 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (6 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (10 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (14 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (18 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (22 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (26 + (32 * 15))},
+  {drum: 'cymbal', vol: 1, len: unit * 4, time: unit * (30 + (32 * 15))},
+  
+  
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 0))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 0))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 0))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (16 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (17 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (19 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (21 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (23 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (25 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (27 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (28 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 1))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 1))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 2))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 2))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 2))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (16 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (17 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (19 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (21 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (23 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (25 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (27 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (28 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 3))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 3))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 6))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 6))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 6))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (16 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (17 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (19 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (21 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (23 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (25 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (27 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (28 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 7))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 7))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 8))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 8))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 8))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (16 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (17 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (19 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (21 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (23 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (25 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (27 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (28 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 9))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 9))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 10))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 10))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 10))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (16 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (17 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (19 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (21 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (23 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (25 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (27 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (28 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 11))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 11))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 12))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 12))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 12))},
+  
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (16 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (17 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (19 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (21 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (23 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (25 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (27 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (28 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (29 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (30 + (32 * 13))},
+  {drum: 'click', vol: 1, len: unit * 1, time: unit * (31 + (32 * 13))},
+  
+  
+  
+  {note: 'a2', vol: 0, len: unit, time: unit * (32 * 16), hidden: false}
+];
+
+var starttime = 'what';
+
+function playSong(timestamp) {
+	if (starttime == 'what') {
+  	starttime = timestamp;
+  }
+  
+  videoctx.clearRect(0, 0, output.width, output.height);
+  for (var i = 0; i < song.length; i++) {
+    if (!song[i].hidden) {
+    	if (song[i].note) {
+        videoctx.fillStyle = '#00f';
+        videoctx.strokeStyle = '#00f';
+        //videoctx.fillRect(((song[i].time -( (timestamp - starttime) / 1000)) / unit) * notewidth, (heights.indexOf(song[i].note) + heightsdrums.length) * noteheight, (song[i].len / unit) * notewidth, noteheight);
+        videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (heights.indexOf(song[i].note)) * noteheight, (song[i].len / unit) * notewidth, 1);
+        videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (heights.indexOf(song[i].note)) * noteheight, 1, noteheight);
+        videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (((heights.indexOf(song[i].note)) * noteheight) + noteheight), (song[i].len / unit) * notewidth, 1);
+        videoctx.fillRect((((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth) + ((song[i].len / unit) * notewidth) - 1, (heights.indexOf(song[i].note)) * noteheight, 1, noteheight);
+      } else if (song[i].drum) {
+        videoctx.fillStyle = '#f00';
+        videoctx.strokeStyle = '#f00';
+        //videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (heightsdrums.indexOf(song[i].drum)) * noteheight, (song[i].len / unit) * notewidth, noteheight);
+        videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (heightsdrums.indexOf(song[i].drum)) * noteheight, (song[i].len / unit) * notewidth, 1);
+        videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (heightsdrums.indexOf(song[i].drum)) * noteheight, 1, noteheight);
+        videoctx.fillRect(((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, (((heightsdrums.indexOf(song[i].drum)) * noteheight) + noteheight) - 1, (song[i].len / unit) * notewidth, 1);
+        videoctx.fillRect((((song[i].time - ((timestamp - starttime) / 1000)) / unit) * notewidth) + ((song[i].len / unit) * notewidth) - 1, ((heightsdrums.indexOf(song[i].drum)) * noteheight), 1, noteheight);
+      }
+    }
+  }
+  
+  videoctx.clearRect(((song[song.length - 1].time - ((timestamp - starttime) / 1000)) / unit) * notewidth, 0, output.width - (((song[song.length - 1].time - ((timestamp - starttime) / 1000)) / unit) * notewidth), output.height);
+  
+  videoctx.fillStyle = '#0f0';
+  
+  //videoctx.fillRect(Math.floor((((timestamp - starttime) / 1000) / unit) * notewidth), 0, 1, output.height);
+  videoctx.fillRect(0, 0, 1, output.height);
+  
+  for (var i = 0; i < song.length; i++) {
+  	if (timestamp - starttime >= song[i].time * 1000 && !song[i].played) {
+    	if (song[i].note) {
+      	playNote({note: song[i].note, vol: song[i].vol, len: song[i].len});
+      } else if (song[i].drum) {
+      	playNote({drum: song[i].drum, vol: song[i].vol, len: song[i].len});
+      }
+      song[i].played = true;
+    }
+  }
+  
+  var allPlayed = true;
+  
+  for (var i = 0; i < song.length; i++) {
+  	if (!song[i].played) {
+    	allPlayed = false;
+    }
+  }
+  
+  if (allPlayed) {
+  	for (var i = 0; i < song.length; i++) {
+    	song[i].played = false;
+    }
+    starttime = 'what';
+  }
+  
+  window.requestAnimationFrame(playSong);
+}
+
+var noteheight = 8;
+var notewidth = 16;
+
+var output = document.querySelector('#notes');
+var videoctx = output.getContext('2d');
+
+var heights = ['b7','a#7','a7','g#7','g7','f#7','f7','e7','d#7','d7','c#7','c7','b6','a#6','a6','g#6','g6','f#6','f6','e6','d#6','d6','c#6','c6','b5','a#5','a5','g#5','g5','f#5','f5','e5','d#5','d5','c#5','c5','b4','a#4','a4','g#4','g4','f#4','f4','e4','d#4','d4','c#4','c4','b3','a#3','a3','g#3','g3','f#3','f3','e3','d#3','d3','c#3','c3','b2','a#2','a2','g#2','g2','f#2','f2','e2','d#2','d2','c#2','c2'];
+
+var heightsdrums = ["click", "hitom", "cow", "midtom1", "midtom2", "lowtom1", "lowtom2", "cymbal", "hihatopen", "hihatclosed", "snareclick", "snare1", "snare2", "clap1", "clap2", "kick1", "kick2", "kick3"];
+
+output.width = (song[song.length - 1].time / unit) * notewidth;
+output.height = (heights.length + heightsdrums.length) * noteheight;
+
+for (var i = 0; i < song.length; i++) {
+  if (!song[i].hidden) {
+  	if (song[i].note) {
+      videoctx.fillStyle = '#00f';
+      videoctx.strokeStyle = '#00f';
+      //videoctx.strokeRect((song[i].time / unit) * notewidth, (heights.indexOf(song[i].note) + heightsdrums.length) * noteheight, (song[i].len / unit) * notewidth, noteheight);
+      videoctx.fillRect((song[i].time / unit) * notewidth, (heights.indexOf(song[i].note)) * noteheight, (song[i].len / unit) * notewidth, 1);
+      videoctx.fillRect((song[i].time / unit) * notewidth, (heights.indexOf(song[i].note)) * noteheight, 1, noteheight);
+      videoctx.fillRect((song[i].time / unit) * notewidth, (((heights.indexOf(song[i].note)) * noteheight) + noteheight) - 1, (song[i].len / unit) * notewidth, 1);
+      videoctx.fillRect((((song[i].time / unit) * notewidth) + ((song[i].len / unit) * notewidth)) - 1, (heights.indexOf(song[i].note)) * noteheight, 1, noteheight);
+    } else if (song[i].drum) {
+      videoctx.fillStyle = '#f00';
+      videoctx.strokeStyle = '#f00';
+      //videoctx.strokeRect((song[i].time / unit) * notewidth, heightsdrums.indexOf(song[i].drum) * noteheight, (song[i].len / unit) * notewidth, noteheight);
+      videoctx.fillRect((song[i].time / unit) * notewidth, (heightsdrums.indexOf(song[i].drum)) * noteheight, (song[i].len / unit) * notewidth, 1);
+      videoctx.fillRect((song[i].time / unit) * notewidth, (heightsdrums.indexOf(song[i].drum)) * noteheight, 1, noteheight);
+      videoctx.fillRect((song[i].time / unit) * notewidth, (((heightsdrums.indexOf(song[i].drum)) * noteheight) + noteheight) - 1, (song[i].len / unit) * notewidth, 1);
+      videoctx.fillRect(((song[i].time / unit) * notewidth) + ((song[i].len / unit) * notewidth) - 1, ((heightsdrums.indexOf(song[i].drum)) * noteheight), 1, noteheight);
+    }
+  }
+}
+
+document.body.onkeydown = (e) => {
+	if (e.code == 'KeyF' && e.ctrlKey && e.shiftKey) {
+  	document.body.requestFullscreen();
+  }
+}
+</script>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+#play {
+  position: fixed;
+  border-radius: 50px;
+  width: 200px;
+  height: 100px;
+  background-color: #333;
+  border: 1px solid white;
+  color: white;
+  
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+#play:disabled {
+  border: 1px solid #666;
+  color: #555;
+  
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+</style>
