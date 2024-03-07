@@ -419,7 +419,7 @@ async function load() {
   */
   
   playButton.onclick = () => {
-  	window.requestAnimationFrame(playSong);
+  	setTimeout(playSong);
     playButton.style.display = 'none';
   }
 }
@@ -1296,7 +1296,8 @@ var song = [
 
 var starttime = 'what';
 
-function playSong(timestamp) {
+function playSong() {
+	var timestamp = performance.now();
 	if (starttime == 'what') {
   	starttime = timestamp;
   }
@@ -1357,7 +1358,7 @@ function playSong(timestamp) {
     starttime = 'what';
   }
   
-  window.requestAnimationFrame(playSong);
+  setTimeout(playSong);
 }
 
 var noteheight = 8;
